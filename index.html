@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chord Ear Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Chord Ear Trainer</h1>
+    <label>Input
+      <select id="input">
+        <option value="midi">MIDI keyboard</option>
+        <option value="mic">Microphone (beta)</option>
+        <option value="screen">On-screen</option>
+      </select>
+    </label>
+    <span id="inputStatus" class="status"></span>
+    <button id="settingsToggle">Settings</button>
+    <button id="statsToggle">Stats</button>
+  </header>
+  <p id="notice" class="notice" hidden></p>
+
+  <section class="stage">
+    <button id="start" class="big">Start</button>
+    <button id="play" class="big" hidden>Replay</button>
+    <div id="prompt" class="prompt">Press Start to unlock audio and begin a session.</div>
+    <div id="slots" class="slots"></div>
+    <div id="feedback" class="feedback"></div>
+    <div id="detected" class="detected"></div>
+    <div class="row" style="justify-content:center">
+      <button id="show" hidden>Show answer</button>
+      <button id="submit" hidden class="primary">Submit</button>
+      <button id="clearKeys" hidden>Clear</button>
+      <button id="calibrate" hidden>Calibrate mic</button>
+    </div>
+  </section>
+
+  <div id="keyboard"></div>
+  <div id="numerals" class="numerals"></div>
+
+  <footer class="row" style="border:0;padding:0;color:inherit;font-size:1rem">
+    <span id="score" class="score">Score 0/0</span>
+    <span id="counter" class="status"></span>
+    <button id="next" hidden class="primary">Next</button>
+  </footer>
+
+  <section id="settings" class="panel" hidden>
+    <h2>Settings</h2>
+    <form id="settingsForm" class="grid">
+      <label>Key <select name="key"></select></label>
+      <label>Random key per session <input type="checkbox" name="randomKey"></label>
+      <label>Chords per progression <input type="number" name="progLength" min="1" max="8"></label>
+      <label>Progressions per session <input type="number" name="progsCount" min="1" max="50"></label>
+      <label>Cadence every n progressions <input type="number" name="cadenceCycle" min="1" max="50"></label>
+      <label>Answer mode
+        <select name="answerMode"><option value="chord">Chord by chord</option><option value="whole">Whole progression</option></select>
+      </label>
+      <label>Seconds per chord <input type="number" name="tempo" min="0.3" max="4" step="0.1"></label>
+      <label>Voicing
+        <select name="voicingMode"><option value="smooth">Smooth (closest voicing)</option><option value="asGiven">Root position around C4</option></select>
+      </label>
+      <label>Lowest note (MIDI) <input type="number" name="low" min="21" max="108"></label>
+      <label>Highest note (MIDI) <input type="number" name="high" min="21" max="108"></label>
+      <label>Max span (semitones) <input type="number" name="maxSpan" min="12" max="87"></label>
+      <label>Mud guard below C3 <input type="checkbox" name="mudGuard"></label>
+      <label>MIDI chord window (ms) <input type="number" name="chordWindow" min="150" max="800" step="10"></label>
+    </form>
+    <h2>Chords</h2>
+    <div id="chordChecks" class="checks"></div>
+    <p class="status">Changes to the session shape apply at the next Start. Tempo and chord window apply at once.</p>
+  </section>
+
+  <section id="stats" class="panel" hidden>
+    <h2>Your weakest chords</h2>
+    <table id="statsTable"><thead><tr><th>Chord</th><th>First try</th><th>Tried</th></tr></thead><tbody></tbody></table>
+    <p><button id="resetStats">Reset stats</button></p>
+  </section>
+
+  <details id="micDebug" hidden>
+    <summary>Mic debug</summary>
+    <div class="panel">
+      <div>Level <span class="level"><i id="micLevel"></i></span> <span id="micStatus" class="status"></span></div>
+      <div id="chroma" class="chroma"></div>
+      <p id="micResult" class="status" style="margin-top:18px"></p>
+    </div>
+  </details>
+
+  <section id="summary" class="panel" hidden></section>
+
+  <footer>
+    <span>Piano: Salamander Grand Piano by Alexander Holm, CC BY 3.0, via the Tone.js audio repository.</span>
+    <span>Shortcuts: Space or R replay, Enter next, number keys answer by numeral.</span>
+  </footer>
+</main>
+<script type="module" src="js/ui.js"></script>
+</body>
+</html>

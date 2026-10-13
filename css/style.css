@@ -1,0 +1,100 @@
+:root {
+  color-scheme: light dark;
+  --bg: #fff;
+  --fg: #1a1a1a;
+  --muted: #666;
+  --line: #d0d0d0;
+  --panel: #f4f4f4;
+  --accent: #2a62c9;
+  --ok: #2e9e44;
+  --bad: #d13b3b;
+  --warn: #d89a1c;
+  --white-key: #fff;
+  --black-key: #222;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161616;
+    --fg: #e8e8e8;
+    --muted: #999;
+    --line: #3a3a3a;
+    --panel: #222;
+    --accent: #6a9df0;
+    --white-key: #d8d8d8;
+    --black-key: #111;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.4 system-ui, sans-serif;
+}
+main { max-width: 760px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 1.4rem; margin: 0 0 8px; }
+h2 { font-size: 1rem; margin: 16px 0 6px; }
+header, footer, .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+footer { color: var(--muted); font-size: 0.85rem; margin-top: 24px; border-top: 1px solid var(--line); padding-top: 8px; }
+button, select, input { font: inherit; color: inherit; }
+button {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: default; }
+button.big { font-size: 1.3rem; padding: 14px 32px; background: var(--accent); color: #fff; border-color: transparent; }
+button.primary { background: var(--accent); color: #fff; border-color: transparent; }
+.status { color: var(--muted); font-size: 0.9rem; }
+.notice { color: var(--warn); font-size: 0.9rem; }
+.stage { text-align: center; margin: 20px 0; }
+.prompt { font-size: 1.2rem; min-height: 1.6em; margin: 12px 0 4px; }
+.feedback { min-height: 1.4em; }
+.feedback.ok { color: var(--ok); }
+.feedback.bad { color: var(--bad); }
+.detected { color: var(--muted); min-height: 1.4em; font-size: 0.9rem; }
+.slots { display: flex; justify-content: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+.slot {
+  width: 56px; height: 44px;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  display: grid; place-items: center;
+  font-weight: 600;
+}
+.slot.current { border-color: var(--accent); }
+.slot.right { background: var(--ok); border-color: var(--ok); color: #fff; }
+.slot.eventually, .slot.wrong, .slot.shown { background: var(--bad); border-color: var(--bad); color: #fff; }
+.keys { position: relative; height: 110px; margin: 12px 0; user-select: none; }
+.key { position: absolute; top: 0; border: 1px solid #555; border-radius: 0 0 3px 3px; }
+.key.white { height: 100%; background: var(--white-key); z-index: 1; color: #777; font-size: 9px; display: flex; align-items: flex-end; justify-content: center; }
+.key.black { height: 62%; background: var(--black-key); z-index: 2; }
+.key.lit { background: var(--accent) !important; }
+.key.reveal { background: var(--warn) !important; }
+.key.sel { background: var(--ok) !important; }
+.keys.clickable .key { cursor: pointer; }
+.numerals { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 8px 0; }
+.numerals button small { color: var(--muted); margin-left: 4px; }
+.score { font-size: 1.1rem; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 12px 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
+.grid label { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.grid input[type=number] { width: 110px; }
+.grid select { width: 200px; }
+.checks { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.checks label { display: inline-flex; gap: 4px; align-items: center; }
+table { border-collapse: collapse; }
+td, th { padding: 2px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+.level { display: inline-block; width: 80px; height: 8px; background: var(--line); vertical-align: middle; }
+.level i { display: block; height: 100%; background: var(--ok); width: 0; }
+.chroma { display: flex; gap: 3px; height: 60px; align-items: flex-end; }
+.chroma div { flex: 1; background: var(--accent); min-height: 1px; position: relative; }
+.chroma div::after { content: attr(data-pc); position: absolute; top: 100%; left: 0; right: 0; text-align: center; font-size: 10px; color: var(--muted); }
+details summary { cursor: pointer; }
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .keys { height: 80px; }
+}
