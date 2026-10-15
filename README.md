@@ -31,6 +31,8 @@ node --test
 
 The site is relative-URL only, so it can live at any subpath, for example `https://learnedconsciousness.com/eartrainer/`.
 
+That address is the live deployment: a plain clone on the server, served by the quick brown fox Caddy as static files. How it was set up and how to update it is in [docs/DEPLOY.md](docs/DEPLOY.md). The options below are for hosting it anywhere else.
+
 Static folder: copy `index.html`, `css/`, `js/` and `samples/` into the subfolder your web server serves. Nothing else is needed.
 
 Docker image (nginx serving the static files on port 80):
